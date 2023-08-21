@@ -1,0 +1,7 @@
+id,mx_number,legal_name,phone,oper_classification,carrier_oper,cargo
+1,111112,HODAN TRANSPORTATION INC,(520) 208-3889,Auth. For Hire,Interstate,General Freight
+2,111114,JASPUNEET SINGH,(559) 803-1313,Auth. For Hire,Interstate,General Freight|Fresh Produce|Paper Products
+3,111115,ORCAS ISLAND FREIGHT LINES INC,(360) 376-2303,Auth. For Hire,Interstate,"General Freight|Household Goods|Metal: sheets, coils, rolls|Logs, Poles, Beams, Lumber|Building Materials|Machinery, Large Objects|Liquids/Gases|Intermodal Cont.|Grain, Feed, Hay|Garbage/Refuse|Chemicals|Commodities Dry Bulk|Paper Products|Utilities|Agricultural/Farm Supplies|Construction"
+4,111117,RG JOHNSON COMPANY INC,(724) 222-6810,Auth. For Hire|Private(Property),Interstate,"General Freight|Metal: sheets, coils, rolls|Building Materials|Machinery, Large Objects|Construction|MINING EQUIPMENT"
+5,111119,THE HARBOR GROUP LLC,(253) 514-6566,Auth. For Hire|Private(Property),Intrastate Only (Non-HM),STORAGE SHEDS
+6,111120,STARBRIGES LLC,(980) 981-4749,Auth. For Hire,Interstate,General Freight
