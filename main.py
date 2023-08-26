@@ -3,9 +3,13 @@ import threading
 import tkinter as tk
 from tkinter import ttk
 from tkinter.scrolledtext import ScrolledText
-from utils import init_webdriver, login, call, end_call, send_message
+
 from selenium.webdriver.common.keys import Keys
 import pandas as pd
+
+import sys
+sys.path.insert(0, "./lib")
+from utils import init_webdriver, login, call, end_call, send_message
 
 driver = None
 otp_verified = False
@@ -325,7 +329,7 @@ if __name__ == "__main__":
             # add button to send message
             send_message_button = ttk.Button(windows, text="Send Message", width=15, cursor="hand2")
             send_message_button.place(x=150, y=300)
-            send_message_button.config(command=lambda: send_message(driver, message_input.get("1.0", tk.END)))
+            send_message_button.config(command=lambda: send_message(driver, data["phone"][i], message_input.get("1.0", tk.END)))
 
     update_col2()
 
