@@ -51,26 +51,14 @@ class Sidebar(ctk.CTkFrame):
         :return: None
         """
         # create a Action status widget
-        self.action_status = Status(
-            parent=self, 
-            title="Action",
-            default_text="wating for cue",
-            text_color=Color.GREEN,
-            x=10, 
-            y=10,
-            gap=45
-        )
-        self.webdriver_status = Status(
-            parent=self, 
-            title="Webdriver",
-            default_text="disconnected",
-            text_color=Color.RED,
-            x=10, 
-            y=30,
-            gap=70
-        )
+        self.action_status = Status(self, "Action", "wating for cue", text_color=Color.GREEN, x=10,  y=10, gap=45)
+        self.webdriver_status = Status(self, "Webdriver", "disconnected", text_color=Color.RED, x=10, y=30, gap=70)
 
-
+        # Webdriver Connect and Disconnect Buttons
+        self.connect_button = ctk.CTkButton(self, text="Connect", width=120)
+        self.connect_button.pack(side="top", expand=False, pady=3)
+        self.disconnect_button = ctk.CTkButton(self, text="Disconnect",fg_color=Color.RED, width=120)
+        self.disconnect_button.pack(side="top", expand=False, pady=3)
 
 if __name__ == "__main__":
     App()
