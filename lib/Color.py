@@ -4,7 +4,8 @@ class Color:
     A static class for color.
     """
     # define colors
-    YELLOW = "yellow"
-    RED= "#ff4000"
+    YELLOW = "#ebff91"
+    RED= "#fb948a"
     GREEN = "#3cb37f"
-    WHITE = "white"
+    WHITE = "#ffffff"
+    TRANSPARENT = "transparent"
