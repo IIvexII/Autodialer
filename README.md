@@ -1,5 +1,11 @@
 # Autodialer
 
+## Building Executable
+
+```bash
+pyinstaller --noconfirm --onedir --windowed --add-data "C:/Users/<user>/AppData/Local/Programs/Python/Python311/Lib/site-packages/customtkinter;customtkinter/"  "C:/Users/<user>/OneDrive/Documents/GitHub/Autodialer/main.py"
+```
+
 ## Eliciting Requirements
 - The user should be able to login to their OpenPhone account automatically (with OTP).
 - It should be able to read the csv file for the clients details and should be able to go thourgh the client list via next and back buttons.
