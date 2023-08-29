@@ -53,6 +53,16 @@ class Status(ctk.CTkFrame):
         """
         self.update(text=text.lower(), text_color=Color.YELLOW)
 
+    def info(self, text: str):
+        """
+        Updates the status of the given widget to info.
+
+        :param text: str (The text of the status widget)
+
+        :return: None
+        """
+        self.update(text=text.lower(), text_color=Color.BLUE)
+
     def update(self, text: str, text_color: str = Color.WHITE):
         """
         Updates the status of the given widget.

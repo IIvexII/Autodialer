@@ -23,7 +23,7 @@ class App(ctk.CTk):
 
         # window configuration
         self.title("AutoDialer")
-        self.geometry("600x400")
+        self.geometry("800x400")
         self.resizable(False, False)
         self.iconbitmap("resources/favicon.ico")
 

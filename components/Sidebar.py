@@ -9,7 +9,10 @@ from components.Status import Status
 
 class Sidebar(ctk.CTkFrame):
     def __init__(self, parent):
-        super().__init__(master=parent, width=180)
+        super().__init__(master=parent)
+        
+        # defining the actions
+        self.action = "waiting for action"
 
         # defining the attributes
         self.webdriver = Webdriver()  # holdes the webdriver  
@@ -22,8 +25,9 @@ class Sidebar(ctk.CTkFrame):
         # create widgets
         self.create_widgets()
 
-        # check the status of the webdriver in the background
+        # check the statuses in the background
         threading.Thread(target=self.check_wedriver_status, daemon=True).start()
+        threading.Thread(target=self.check_action_status, daemon=True).start()
 
     def create_widgets(self):
         """
@@ -32,7 +36,7 @@ class Sidebar(ctk.CTkFrame):
         :return: None
         """
         # create a Action status widget
-        self.action_status = Status(self, "Action", "wating for action", text_color=Color.GREEN, x=10,  y=10, gap=45)
+        self.action_status = Status(self, "Action", self.action, text_color=Color.GREEN, x=10,  y=10, gap=45)
         self.webdriver_status = Status(self, "Webdriver", "disconnected", text_color=Color.RED, x=10, y=30, gap=70)
 
         # create a Webdriver widget
@@ -44,6 +48,9 @@ class Sidebar(ctk.CTkFrame):
 
         :return: None
         """
+        # update the status of the action
+        self.action = "connecting webdriver"
+
         try:
             # initialize the webdriver
             self.webdriver.connect()
@@ -56,11 +63,11 @@ class Sidebar(ctk.CTkFrame):
 
         :return: None
         """
+        self.action = "destroying webdriver"
         try:
             # disconnect the webdriver
             self.webdriver.disconnect()
         except Exception as e:
-            print(e)
             self.webdriver_status.error("disconnected")
 
     def check_wedriver_status(self):
@@ -79,6 +86,24 @@ class Sidebar(ctk.CTkFrame):
             self.webdriver_status.update(text=self.webdriver.get_status(), text_color=color)
 
             time.sleep(1)
+
+    def check_action_status(self):
+        """
+        Checks the status of the action.
+
+        :return: None
+        """
+        # untill the app is running
+        while True:
+            if self.action != "waiting for action":
+                self.action_status.info(text=self.action)
+                time.sleep(2)
+
+                # reset the action status
+                self.action = "waiting for action"
+            else:
+                self.action_status.success(text=self.action)            
+                time.sleep(1)
 
 
 class WebDriverWidget(ctk.CTkFrame):
