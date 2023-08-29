@@ -31,7 +31,7 @@ class Status(ctk.CTkFrame):
 
         :return: None
         """
-        self._update(text=text.lower(), text_color=Color.GREEN)
+        self.update(text=text.lower(), text_color=Color.GREEN)
     
     def error(self, text: str):
         """
@@ -41,7 +41,7 @@ class Status(ctk.CTkFrame):
 
         :return: None
         """
-        self._update(text=text.lower(), text_color=Color.RED)
+        self.update(text=text.lower(), text_color=Color.RED)
 
     def warning(self, text: str):
         """
@@ -51,9 +51,9 @@ class Status(ctk.CTkFrame):
 
         :return: None
         """
-        self._update(text=text.lower(), text_color=Color.YELLOW)
+        self.update(text=text.lower(), text_color=Color.YELLOW)
 
-    def _update(self, text: str, text_color: str = Color.WHITE):
+    def update(self, text: str, text_color: str = Color.WHITE):
         """
         Updates the status of the given widget.
 

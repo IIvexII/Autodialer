@@ -1,7 +1,10 @@
 import customtkinter as ctk
 import tkinter as tk
+import threading
+import time
 
 from lib.Color import Color
+from lib.Webdriver import Webdriver
 from components.Status import Status
 
 class Sidebar(ctk.CTkFrame):
@@ -9,8 +12,9 @@ class Sidebar(ctk.CTkFrame):
         super().__init__(master=parent, width=180)
 
         # defining the attributes
-        self.action_status = None
-        self.webdriver_status = None
+        self.webdriver = Webdriver()  # holdes the webdriver  
+        self.action_status = None     # holdes the widget that shows the status of the action
+        self.webdriver_status = None  # holdes the widget that shows the status of the webdriver
 
         # frame location configuration
         self.pack(side="left", fill="y", expand=False)
@@ -18,6 +22,8 @@ class Sidebar(ctk.CTkFrame):
         # create widgets
         self.create_widgets()
 
+        # check the status of the webdriver in the background
+        threading.Thread(target=self.check_wedriver_status, daemon=True).start()
 
     def create_widgets(self):
         """
@@ -38,7 +44,11 @@ class Sidebar(ctk.CTkFrame):
 
         :return: None
         """
-        self.webdriver_status.success("connected")
+        try:
+            # initialize the webdriver
+            self.webdriver.connect()
+        except Exception as e:
+            self.webdriver_status.error("failed to connect")
 
     def disconnect_webdriver(self):
         """
@@ -46,7 +56,30 @@ class Sidebar(ctk.CTkFrame):
 
         :return: None
         """
-        self.webdriver_status.error("disconnected")
+        try:
+            # disconnect the webdriver
+            self.webdriver.disconnect()
+        except Exception as e:
+            print(e)
+            self.webdriver_status.error("disconnected")
+
+    def check_wedriver_status(self):
+        """
+        Checks the status of the webdriver.
+
+        :return: None
+        """
+        # untill the app is running
+        while True:
+            color = Color.RED
+
+            if self.webdriver.get_status() == "connected":
+                color = Color.GREEN
+            
+            self.webdriver_status.update(text=self.webdriver.get_status(), text_color=color)
+
+            time.sleep(1)
+
 
 class WebDriverWidget(ctk.CTkFrame):
     def __init__(self, parent, x: int, y: int, connect_function: callable = None, disconnect_function: callable = None):
