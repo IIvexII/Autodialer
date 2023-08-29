@@ -44,14 +44,33 @@ class Webdriver:
         # configure the webdriver
         edge_options = EdgeOptions()
         edge_options.use_chromium = True
-        edge_options.add_argument("headless")
-        edge_options.add_argument("disable-gpu")
+        # edge_options.add_argument("headless")
+        # edge_options.add_argument("disable-gpu")
 
         try:
             # initialize the webdriver
             self.driver = Edge(executable_path='./webdriver/msedgedriver.exe', options=edge_options)
         except Exception as e:
             self.status = "failed to connect"
+
+    def open(self, url: str):
+        """
+        This function will open the url in the webdriver
+
+        :param url: url<str>
+        :return: None
+        """
+        # check if the driver is None
+        if self.driver is None:
+            return
+
+        # check if the driver is not None
+        elif self.driver is not None:
+            try:
+                # open the url
+                self.driver.get(url)
+            except:
+                pass
 
     def get_status(self):
         """

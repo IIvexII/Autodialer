@@ -2,7 +2,7 @@ import customtkinter as ctk
 import tkinter as tk
 
 from components.Sidebar import Sidebar
-
+from lib.Webdriver import Webdriver
 class App(ctk.CTk):
     def __init__(self):
         super().__init__()
@@ -10,9 +10,12 @@ class App(ctk.CTk):
         # configure the app
         self._configuration()
 
+        # initialize the webdriver
+        self.webdriver = Webdriver()
+
         # create a widget
-        sidebar = Sidebar(self)
-        
+        sidebar = Sidebar(self, self.webdriver)
+
         # run the app
         self.mainloop()
 
